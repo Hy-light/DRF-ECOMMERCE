@@ -26,6 +26,7 @@ venv/
 .env/
 .venv/
 
+# Environments 
 .env
 
 # Database
