@@ -18,5 +18,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    # The main api documentation page
     path("api/schema/docs/", SpectacularSwaggerView.as_view(url_name="schema")), #name="swagger"
 ]
