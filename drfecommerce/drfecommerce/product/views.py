@@ -12,7 +12,7 @@ from .serializers import CategorySerializer, ProductSerializer, BrandSerializer
 # Create your views here.
 class CategoryViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving categories.
+    A simple ViewSet for listing or retrieving all categories.
     """
 
     queryset = Category.objects.all()
@@ -26,7 +26,7 @@ class CategoryViewSet(viewsets.ViewSet):
 
 class BrandViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving Brand.
+    A simple ViewSet for listing or retrieving all Brand.
     """
 
     queryset = Brand.objects.all()
@@ -40,7 +40,7 @@ class BrandViewSet(viewsets.ViewSet):
 
 class ProductViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving Product.
+    A simple ViewSet for listing or retrieving  all Product.
     """
 
     queryset = Product.objects.all()
