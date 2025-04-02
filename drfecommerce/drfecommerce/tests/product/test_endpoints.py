@@ -36,7 +36,7 @@ class TestProductEndpoints:
 
     endpoint = "/api/product/"
 
-    def test_product_get(self, product_factory, api_client):
+    def test_return_all_product(self, product_factory, api_client):
         # Arrange
         product_factory.create_batch(4)
         # Act
@@ -44,3 +44,26 @@ class TestProductEndpoints:
         # Assert
         assert response.status_code == 200
         assert len(json.loads(response.content)) == 4
+        
+    def test_return_single_product_by_slug(self, product_factory, api_client):
+        # Arrange
+        obj = product_factory(slug="test_product")
+        # Act
+        response = api_client().get(f"{self.endpoint}{obj.slug}/")
+        # Assert
+        assert response.status_code == 200
+        assert len(json.loads(response.content)) == 1
+        
+    def test_return_products_by_category_slug(self, category_factory, product_factory, api_client):
+        # Arrange
+        obj = category_factory(slug="test-slug")
+        product_factory(category=obj)
+        # Act
+        response = api_client().get(f"{self.endpoint}category/{obj.slug}/")
+        # Assert
+        assert response.status_code == 200
+        assert len(json.loads(response.content)) == 1
+        
+        
+
+
