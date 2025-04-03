@@ -6,7 +6,7 @@ import factory
 
 # from factory import Faker, LazyFunction
 
-from drfecommerce.product.models import Category, Brand, Product, ProductLine
+from drfecommerce.product.models import Category, Brand, Product, ProductLine, ProductImage
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -60,3 +60,16 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
     stock_qty = 100
     price = 10.00
     is_active = True
+
+
+class ProductImageFactory(factory.django.DjangoModelFactory):
+    """
+    Factory for creating ProductImage instances.
+    """
+    
+    class Meta:
+        model = ProductImage
+    
+    alternate_text = "test alternative text"
+    url = "test.jpg"
+    productline = factory.SubFactory(ProductLineFactory)
