@@ -63,3 +63,11 @@ class TestProductLineModel:
             # Act
             product_line_factory(product=obj, order=1).clean()
         
+        
+class TestProductImageModel:
+    def test_str_method(self, product_image_factory):
+        # Act
+        obj = product_image_factory(order=1)
+
+        # Assert
+        assert obj.__str__() == "1"

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from django.db import connection # to inspect queries
+from django.db.models import Prefetch
 
 from drf_spectacular.utils import extend_schema
 
@@ -40,7 +41,7 @@ class BrandViewSet(viewsets.ViewSet):
 
 class ProductViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving  all Product.
+    A simple ViewSet for listing or retrieving  all Products.
     """
 
     queryset = Product.objects.isactive()  # Use the custom manager to get active products
@@ -49,7 +50,7 @@ class ProductViewSet(viewsets.ViewSet):
     
     @extend_schema(responses=ProductSerializer)
     def retrieve(self, request, slug="slug"):
-        serializer = ProductSerializer(self.queryset.filter(slug=slug).select_related("category", "brand"), many=True,)
+        serializer = ProductSerializer(Product.objects.filter(slug=slug).select_related("category", "brand").prefetch_related(Prefetch("product_line__product_image")), many=True,)
         
         data = Response(serializer.data)
         
